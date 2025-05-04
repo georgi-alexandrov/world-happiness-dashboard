@@ -1,14 +1,17 @@
+import streamlit as st
 import pandas as pd
 import os
+
+# For sensitive data, better aproach is to load data from object storage (AWS S3, Azure Blob, MinIO etc.) and API keys from environment variables.
 
 # When loading environment variables (if needed, for exmple with docker)
 # from dotenv import load_dotenv
 
 # load_dotenv()
 # dataset_path = os.getenv('dataset_path')
-
 dataset_path = "./app/data/"
 
+# Below mapping can be transferred to a config file or a database for better maintainability (mounted volumes in docker)
 COLUMN_ALIGNMENT_MAPPING = {
     "GDP per capita": "Economy (GDP per Capita)",
     "Social support": "Family",
@@ -36,7 +39,7 @@ COUNTRY_ALIGNMENT_MAPPING = {
 }
 
 
-def load_data(dataset_path:str) -> dict:
+def load_data(dataset_path: str) -> dict:
     """
     Load datasets from the specified path and return a dictionary of DataFrames.
     """
@@ -48,7 +51,7 @@ def load_data(dataset_path:str) -> dict:
     return datasets
 
 
-def prepare_data(datasets_dict:dict) -> pd.DataFrame:
+def prepare_data(datasets_dict: dict) -> pd.DataFrame:
     """
     Prepare the data by renaming columns, aligning country names, cleaning and merging the DataFrames.
     """
@@ -112,8 +115,8 @@ def prepare_data(datasets_dict:dict) -> pd.DataFrame:
         df = pd.concat([df, dataset], ignore_index=True)
 
     # Get the set of common countries across all datasets
-    common_countries = set(list(datasets_dict.values())[0]['Country']).intersection(
-    *[set(dataset["Country"]) for dataset in datasets_dict.values()]
+    common_countries = set(list(datasets_dict.values())[0]["Country"]).intersection(
+        *[set(dataset["Country"]) for dataset in datasets_dict.values()]
     )
 
     # Filter the DataFrame to include only common countries
@@ -126,6 +129,8 @@ def prepare_data(datasets_dict:dict) -> pd.DataFrame:
 
     return df
 
+
+@st.cache_data
 def get_data() -> pd.DataFrame:
     """
     Load and prepare the DataFrame.
@@ -136,6 +141,6 @@ def get_data() -> pd.DataFrame:
     # Prepare the data by renaming columns, aligning country names, and merging DataFrames
     df = prepare_data(df_dict)
     # Reset the index of the DataFrame
-    df.reset_index(drop=True, inplace=True) 
+    df.reset_index(drop=True, inplace=True)
     # Return the prepared DataFrame
     return df
