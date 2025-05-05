@@ -1,0 +1,9 @@
+version: '1.0'
+
+services:
+  whd:
+    image: ghcr.io/georgi-alexandrov/world-happiness-dashboard:latest
+    container_name: world-happiness-dashboard
+    ports:
+      - "8501:8501"
+    restart: unless-stopped

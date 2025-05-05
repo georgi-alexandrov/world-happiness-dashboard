@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.express as px
 
-st.title("Happiness and contributing scores - trends and comparison")
+st.title("Happiness and contributing factors - trends and comparison")
 st.write(
     "Explore the trends and comparisons of happiness and contributing factors across different countries and regions."
 )

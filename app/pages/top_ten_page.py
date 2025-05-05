@@ -11,7 +11,7 @@ with st.container(border=True):
     col1, col2 = st.columns(2)
     with col1:
         with st.container(border=True):
-            st.subheader("📈 The 10 Countries with highest happiness score")
+            st.subheader("📈 The 10 countries with highest happiness score")
             st.write("Based on the average happiness score from 2015 to 2019.")
             top_10_total = (
                 st.session_state.df.groupby("Country")["Happiness Score"]
@@ -85,7 +85,7 @@ with st.container(border=True):
     col3, col4 = st.columns(2)
     with col3:
         with st.container(border=True):
-            st.subheader("📉 The 10 Countries with lowest happiness score")
+            st.subheader("📉 The 10 countries with lowest happiness score")
             st.write("Based on the average happiness score from 2015 to 2019.")
             bottom_10_total = (
                 st.session_state.df.groupby("Country")["Happiness Score"]

@@ -23,11 +23,22 @@ def main():
             px.colors.qualitative.Plotly,  # Use Plotly's qualitative color palette
         )
     }
-
-    st.sidebar.title("World Happiness Dashboard")
-    st.sidebar.write("Explore the world happiness data!")
+    
+    st.sidebar.image("assets/logo.png", width=200, use_container_width=True)
+    st.sidebar.markdown(
+        """
+        <div style="text-align: center;">
+            <h2>World Happiness Dashboard</h2>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+        
+    # st.sidebar.title("World Happiness Dashboard")
+    # st.sidebar.write("Explore the world happiness data!")
     with st.sidebar.expander("ℹ️ Data Overview", expanded=True):
         st.write(
+            "Explore the world happiness data! "
             f"This dashboard provides insights into the world happiness data from {st.session_state.df['Year'].min()} to {st.session_state.df['Year'].max()}. "
             f"Happiness Scores and 6 explanatory factors from {len(st.session_state.df['Country'].unique())} countries across {len(st.session_state.df['Region'].unique())} regions. "
             "You can explore the data by different countries, regions, and years."

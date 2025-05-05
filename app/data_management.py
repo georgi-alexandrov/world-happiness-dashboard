@@ -9,7 +9,7 @@ import os
 
 # load_dotenv()
 # dataset_path = os.getenv('dataset_path')
-dataset_path = "./app/data/"
+dataset_path = "./data/"
 
 # Below mapping can be transferred to a config file or a database for better maintainability (mounted volumes in docker)
 COLUMN_ALIGNMENT_MAPPING = {
