@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import plotly.express as px
 from data_management import get_data
@@ -24,7 +25,7 @@ def main():
         )
     }
 
-    st.sidebar.image("assets/logo.png", width=200, use_container_width=True)
+    st.sidebar.image(os.path.join(os.path.dirname(__file__), "assets/logo.png"), width=200, use_container_width=True)
     st.sidebar.markdown(
         """
         <div style="text-align: center;">
