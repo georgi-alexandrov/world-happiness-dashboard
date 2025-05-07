@@ -23,7 +23,7 @@ def main():
             px.colors.qualitative.Plotly,  # Use Plotly's qualitative color palette
         )
     }
-    
+
     st.sidebar.image("assets/logo.png", width=200, use_container_width=True)
     st.sidebar.markdown(
         """
@@ -33,9 +33,7 @@ def main():
         """,
         unsafe_allow_html=True,
     )
-        
-    # st.sidebar.title("World Happiness Dashboard")
-    # st.sidebar.write("Explore the world happiness data!")
+
     with st.sidebar.expander("ℹ️ Data Overview", expanded=True):
         st.write(
             "Explore the world happiness data! "

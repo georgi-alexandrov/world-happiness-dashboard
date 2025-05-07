@@ -96,7 +96,7 @@ The World Happiness data is  locatedin the `/app/data` folder as individual CSV 
 
 The dashboard is built using Streamlit, a powerful framework for creating interactive web applications in Python. The application is designed to be user-friendly and visually appealing, making it easy to explore and analyze the data.
 
-Access the dashboard on [Streamlit](https://share.streamlit.io/georgi-alexandrov/world-happiness-dashboard/app/main.py) or run it locally using the provided instructions.
+Access the dashboard on [Streamlit](https://world-happiness-dashboard-pa-tech-lead-recr-task.streamlit.app/) or run it locally using the provided instructions.
 
 ## 🛠️ Installation
 

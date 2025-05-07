@@ -47,7 +47,7 @@ with st.container(border=True):
             st.subheader("The 10 happiest countries per year")
             st.selectbox(
                 "Select a year:",
-                options=st.session_state.df["Year"].unique(),
+                options=sorted(st.session_state.df["Year"].unique()),
                 index=0,
                 key="top_10_year_select",
             )
@@ -121,7 +121,7 @@ with st.container(border=True):
             st.subheader("The 10 least happy countries per year")
             st.selectbox(
                 "Select a year:",
-                options=st.session_state.df["Year"].unique(),
+                options=sorted(st.session_state.df["Year"].unique()),
                 index=0,
                 key="bottom_10_year_select",
             )

@@ -6,15 +6,17 @@ st.write(
     "Explore the trends and comparisons of happiness and contributing factors across different countries and regions."
 )
 
-evolution_df = st.session_state.df.copy()
-
 
 def evolution_chart(df, column):
+    """
+    Create a line chart showing the evolution of a specified column over the years for selected countries and regions.
+    """
+
     fig = px.line(
-        evolution_df.loc[
-            (evolution_df["Country"].isin(st.session_state.country_select))
-            & (evolution_df["Region"].isin(st.session_state.region_select))
-        ],
+        df.loc[
+            (df["Country"].isin(st.session_state.country_select))
+            & (df["Region"].isin(st.session_state.region_select))
+        ].sort_values(by="Year"),
         x="Year",
         y=column,
         color="Country",
@@ -41,6 +43,7 @@ def evolution_chart(df, column):
         marker=dict(size=8, opacity=0.8),
         line=dict(width=2, dash="solid"),
     )
+
     return fig
 
 
@@ -49,22 +52,22 @@ with st.container(border=True):
     with col1:
         st.multiselect(
             "Select Region:",
-            options=sorted(evolution_df["Region"].unique()),
-            default=sorted(evolution_df["Region"].unique())[0],
+            options=sorted(st.session_state.df["Region"].unique()),
+            default=sorted(st.session_state.df["Region"].unique())[0],
             key="region_select",
         )
     with col2:
         st.multiselect(
             "Select Countries:",
             options=sorted(
-                evolution_df.loc[
-                    evolution_df["Region"].isin(st.session_state.region_select),
+                st.session_state.df.loc[
+                    st.session_state.df["Region"].isin(st.session_state.region_select),
                     "Country",
                 ].unique()
             ),
             default=sorted(
-                evolution_df.loc[
-                    evolution_df["Region"].isin(st.session_state.region_select),
+                st.session_state.df.loc[
+                    st.session_state.df["Region"].isin(st.session_state.region_select),
                     "Country",
                 ].unique()
             )[0:7],
@@ -72,19 +75,19 @@ with st.container(border=True):
         )
     st.multiselect(
         "Select Scores:",
-        options=evolution_df.columns[3:],
+        options=st.session_state.df.columns[3:],
         default="Happiness Score",
         key="score_select",
     )
 
 for score in st.session_state.score_select:
     with st.container(border=True):
-        st.subheader(f"💹 {score} per year")
-        fig = evolution_chart(evolution_df, score)
+        st.subheader(f"{score} per year")
+        fig = evolution_chart(st.session_state.df, score)
         st.plotly_chart(fig, use_container_width=True)
 
 
 # with st.container(border=True):
 #     st.subheader("Evolution of Happiness Rank")
-#     fig = evolution_chart(evolution_df, "Happiness Rank")
+#     fig = evolution_chart(st.session_state.df, "Happiness Rank")
 #     st.plotly_chart(fig, use_container_width=True)
